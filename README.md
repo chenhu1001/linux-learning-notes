@@ -1,5 +1,5 @@
 # linux-learning-notes
-Linux使用笔记
+Linux学习笔记
 ## s*r
 
 ```
