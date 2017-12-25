@@ -25,6 +25,10 @@ wget --no-check-certificate https://github.com/kuoruan/shell-scripts/raw/master/
 chmod +x ./kcptun.sh
 ./kcptun.sh
 ```
+强制kill掉某端口
+```
+lsof -i :9000 | grep LISTEN | awk '{print $2}' | xargs kill -9
+```
 
 ## live555
 
