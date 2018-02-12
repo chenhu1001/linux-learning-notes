@@ -88,4 +88,3 @@ systemctl enable redis.service
 
 * 配置为远程可访问  
 打开文件/etc/redis.conf，找到其中的#bind 127.0.0.1，去掉前面的#。
-yum install redis
