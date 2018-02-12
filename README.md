@@ -83,9 +83,9 @@ systemctl start redis.service
 systemctl enable redis.service
 ```
 
-* 设置redis密码
+* 设置redis密码  
 打开文件/etc/redis.conf，找到其中的#requirepass foobared，去掉前面的#，并把foobared改成你的密码。
 
-* 配置为远程可访问
+* 配置为远程可访问  
 打开文件/etc/redis.conf，找到其中的#bind 127.0.0.1，去掉前面的#。
 yum install redis
