@@ -88,3 +88,19 @@ systemctl enable redis.service
 
 * 配置为远程可访问  
 打开文件/etc/redis.conf，找到其中的#bind 127.0.0.1，去掉前面的#。
+
+## frp
+
+```
+# frpc.ini
+[common]
+server_addr = 198.181.46.166
+server_port = 5443
+privilege_token = tIMrKiL94XZeXhb3
+
+[web]
+privilege_mode = true
+type = http
+local_port = 4000
+custom_domains = www.clang.online
+```
