@@ -86,6 +86,9 @@ systemctl enable redis.service
 * 设置redis密码  
 打开文件/etc/redis.conf，找到其中的#requirepass foobared，去掉前面的#，并把foobared改成你的密码。
 
+* 测试redis连接是否成功
+redis-cli -h 198.xxx.xxx.xxx -p 6379
+
 ## frp
 
 ```
@@ -146,4 +149,27 @@ mysql>FLUSH PRIVILEGES
 ```
 // 退出MySQL服务器，这样就可以在其它任何的主机上以root身份登录
 mysql>EXIT
+```
+
+## 防火墙配置
+### firewall
+
+```
+# service firewalld status   // 查看防火墙状态（disabled 表明 已经禁止开启启动 enable 表示开机自启，inactive 表示防火墙关闭状态 activated（running）表示为开启状态）
+# service firewalld start;  或者 #systemctl start firewalld.service;#开启防火墙
+# service firewalld stop;  或者 #systemctl stop firewalld.service;#关闭防火墙
+# service firewalld restart;  或者 #systemctl restart firewalld.service;  #重启防火墙
+# systemctl disable firewalld.service   // 禁止防火墙开启自启
+# systemctl enable firewalld   // 设置防火墙开机启动
+# yum remove firewalld   // #卸载firewall
+```
+
+## iptables
+
+```
+#yum install iptables-services   // 安装iptables防火墙
+#vi /etc/sysconfig/iptables   // 编辑防火墙配置文件，开放3306端口
+添加配置：-A INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT
+#systemctl restart iptables.service   // 最后重启防火墙使配置生效
+#systemctl enable iptables.service   // 设置防火墙开机启动
 ```
