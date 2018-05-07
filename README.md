@@ -89,6 +89,18 @@ systemctl enable redis.service
 * 测试redis连接是否成功
 redis-cli -h 198.xxx.xxx.xxx -p 6379
 
+离线安装
+```
+$ wget http://download.redis.io/releases/redis-4.0.9.tar.gz
+$ tar xzf redis-4.0.9.tar.gz
+$ cd redis-4.0.9
+$ make
+```
+The binaries that are now compiled are available in the src directory. Run Redis with:
+```
+src/redis-server
+```
+
 ## frp
 
 ```
