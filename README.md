@@ -246,3 +246,12 @@ vi /etc/sysconfig/iptables #编辑防火墙配置文件
 systemctl restart iptables.service #重启防火墙使配置生效
 systemctl enable iptables.service #设置防火墙开机启动
 ```
+
+## Nginx将静态文件响应POST请求，提示405错误问题
+在nginx.conf中，请求的静态数据路径中，添加如下语句error_page 405=200 $request_uri：
+```
+location ~ \.(action|jsp) {
+    root $testDataFold;
+    error_page 405 =200 $request_uri;
+}
+```
