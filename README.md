@@ -255,3 +255,22 @@ location ~ \.(action|jsp) {
     error_page 405 =200 $request_uri;
 }
 ```
+## Centos使用yum构建离线安装包
+在Centos中我们安装软件的方式往往是使用yum进行在线安装，但是在某些情况下（公司服务器使用的是内网）我们就需要使用yum将安装包下载到本地，并进行离线安装。以下是离线安装docker步骤：
+
+首先创建一个目录用于存放安装包：
+
+```
+mkdir /usr/local/docker
+```
+
+通过yum命令下载docker安装文件：
+
+```
+yum install --downloadonly --downloaddir=/usr/local/docker docker-io
+```
+
+使用rpm命令进行安装
+```
+rpm -Uvh --force --nodeps /usr/local/docker/*rpm
+```
