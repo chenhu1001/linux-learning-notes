@@ -86,6 +86,9 @@ systemctl enable redis.service
 * 设置redis密码  
 打开文件/etc/redis.conf，找到其中的#requirepass foobared，去掉前面的#，并把foobared改成你的密码。
 
+* 设置远程访问
+注释#bind 127.0.0.1
+
 * 测试redis连接是否成功
 redis-cli -h 198.xxx.xxx.xxx -p 6379
 
