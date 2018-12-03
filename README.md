@@ -1,11 +1,9 @@
 # linux-learning-notes
 Linux学习笔记
-## s*r
+## s*
 
 ```
-wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
-chmod +x shadowsocks-all.sh
-./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
+https://teddysun.com/486.html
 ```
 
 ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log解释
