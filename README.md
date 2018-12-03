@@ -3,16 +3,6 @@ Linux学习笔记
 ## s*
 [一键脚本](https://teddysun.com/486.html)
 
-./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log解释
-* 用途  
-将运行时的log写到shadowsocks-all.log文件中，同时也输出到标准输出。
- 
-* 解释  
-2表示标准输出。
-文件描述符：0 stdin，1 stdout，2 stderr
-2>&1，表示标准错误重定向到标准输出，如果没有2>&1，只会有标准输出，没有错误；tee的作用同时输出到控制台和文件。  
-make 2>log.txt 表示只将错误写到文件，其它的还是在标准输出。
-
 ## kcptun
 
 ```
