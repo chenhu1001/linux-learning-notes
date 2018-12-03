@@ -1,10 +1,7 @@
 # linux-learning-notes
 Linux学习笔记
 ## s*
-
-```
 [一键脚本](https://teddysun.com/486.html)
-```
 
 ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log解释
 * 用途  
