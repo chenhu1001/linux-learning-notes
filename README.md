@@ -264,9 +264,11 @@ rpm -Uvh --force --nodeps /usr/local/docker/*rpm
 ```
 
 ## 安装sz,rz命令
+```
 wget https://raw.githubusercontent.com/chenhu1001/linux-learning-notes/master/rzsz-3.48.tar.gz
 tar zxvf  rzsz-3.34.tar.gz
 cd src
 修改Makefile文件第四行的"OFLAG= -O"为"OFLAG= -O -DREGISTERED"
 make posix
 cp rz sz /usr/bin
+```
