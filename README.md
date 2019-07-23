@@ -272,3 +272,25 @@ cd src
 make posix
 cp rz sz /usr/bin
 ```
+
+## 自动上传文件脚本
+```
+#!/bin/bash
+
+#---------------------------------------------------------------------------------------------
+dir="/Users/chenhu/Documents/ticketPlatform2/ticketManagementH5/target/"  #jar 生成路径
+#---------------------------------------------------------------------------------------------
+
+main(){
+	echo "...............................jar包开始上传到服务器"
+	expect -c "
+	spawn scp $dir/ticketManagementH5.jar  root@192.168.129.16:/data/h5/ticketManagementH5.jar
+	expect {
+    \"*assword:\" {set timeout 300; send \"123456\r\";}
+      }
+	expect eof"
+	echo -e "==>jar包上传到服务器完成"
+}
+
+main
+```
