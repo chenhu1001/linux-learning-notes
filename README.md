@@ -294,3 +294,10 @@ main(){
 
 main
 ```
+
+
+## Maven自动打包
+```
+cd /Users/chenhu/Documents/ticketPlatform2/ticketManagementH5
+/Users/chenhu/apache-maven-3.5.4/bin/mvn clean install
+```
