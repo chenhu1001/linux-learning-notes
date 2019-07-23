@@ -304,20 +304,20 @@ cd /Users/chenhu/Documents/ticketPlatform2/ticketManagementH5
 
 ## 远程部署服务
 ```
+#!/bin/bash
+
 #查询项目进程
-    JAR_pid=`ssh root@116.6.1.53 ps -ef | grep "ticketManagementH5.jar" | grep -v "grep"|awk '{print $2}'`
-      echo "JAR_pid="
-      echo $JAR_pid
-      if [  "$JAR_pid" != "" ];then
-         ssh root@116.6.1.53 kill -9 $JAR_pid     #杀死项目进程
-         echo "杀死项目进程"
-      else
-         echo "进程不存在可以继续部署"
-      fi
+JAR_pid=`ssh root@192.168.129.16 ps -ef | grep "ticketManagementH5.jar" | grep -v "grep"|awk '{print $2}'`
+echo "JAR_pid="
+echo $JAR_pid
+if [  "$JAR_pid" != "" ];then
+    ssh root@192.168.129.16 kill -9 $JAR_pid     #杀死项目进程
+    echo "杀死项目进程"
+else
+    echo "进程不存在可以继续部署"
+fi
 
-    echo "...............................开始启动服务"
-	#ssh root@116.6.1.53 "nohup /data/tools/jdk1.8.0_151/bin/java -jar /data/h5/ticketManagementH5.jar  2>&1 &"
-	ssh root@116.6.1.53 "nohup /data/tools/jdk1.8.0_151/bin/java -jar /data/h5/ticketManagementH5.jar &"
-
-	echo -e "==>服务器部署完成"
+echo "...............................开始启动服务"
+ssh root@192.168.129.16 "nohup /data/tools/jdk1.8.0_151/bin/java -jar /data/h5/ticketManagementH5.jar &"
+echo -e "==>服务器部署完成"
 ```
