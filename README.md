@@ -301,3 +301,23 @@ main
 cd /Users/chenhu/Documents/ticketPlatform2/ticketManagementH5
 /Users/chenhu/apache-maven-3.5.4/bin/mvn clean install
 ```
+
+## 远程部署服务
+```
+#查询项目进程
+    JAR_pid=`ssh root@116.6.1.53 ps -ef | grep "ticketManagementH5.jar" | grep -v "grep"|awk '{print $2}'`
+      echo "JAR_pid="
+      echo $JAR_pid
+      if [  "$JAR_pid" != "" ];then
+         ssh root@116.6.1.53 kill -9 $JAR_pid     #杀死项目进程
+         echo "杀死项目进程"
+      else
+         echo "进程不存在可以继续部署"
+      fi
+
+    echo "...............................开始启动服务"
+	#ssh root@116.6.1.53 "nohup /data/tools/jdk1.8.0_151/bin/java -jar /data/h5/ticketManagementH5.jar  2>&1 &"
+	ssh root@116.6.1.53 "nohup /data/tools/jdk1.8.0_151/bin/java -jar /data/h5/ticketManagementH5.jar &"
+
+	echo -e "==>服务器部署完成"
+```
