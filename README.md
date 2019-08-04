@@ -321,3 +321,33 @@ echo "...............................开始启动服务"
 ssh root@192.168.129.16 "nohup /data/tools/jdk1.8.0_151/bin/java -jar /data/h5/ticketManagementH5.jar &"
 echo -e "==>服务器部署完成"
 ```
+
+## 安装nginx
+安装yum-utils
+```
+yum install yum-utils
+```
+设置 yum仓库, 编辑 /etc/yum.repos.d/nginx.repo
+```
+[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+
+[nginx-mainline]
+name=nginx mainline repo
+baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=https://nginx.org/keys/nginx_signing.key
+```
+默认使用 stable的nginx, 要使用最新的需要切换到mainline (可选)
+```
+yum-config-manager --enable nginx-mainline
+```
+安装nginx
+```
+yum install nginx
+```
