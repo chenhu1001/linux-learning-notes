@@ -351,3 +351,27 @@ yum-config-manager --enable nginx-mainline
 ```
 yum install nginx
 ```
+
+## centos7防火墙关闭以及清除防火墙规则
+关闭防火墙
+```
+查看防火墙状态
+firewall-cmd --state
+
+停止firewall
+systemctl stop firewalld.service
+
+禁止firewall开机启动
+systemctl disable firewalld.service 
+```
+清除防火墙规则
+```
+iptables -F 
+(flush 清除所有的已定规则)
+
+iptables -X 
+(delete 删除所有用户“自定义”的链（tables）)
+
+iptables -Z 
+（zero 将所有的chain的计数与流量统计都归零）
+```
