@@ -375,3 +375,15 @@ iptables -X
 iptables -Z 
 （zero 将所有的chain的计数与流量统计都归零）
 ```
+
+## 同步时间
+```
+yum install ntpdate -y
+ntpdate 0.asia.pool.ntp.org
+```
+
+可以加入到定时任务中
+
+```
+* */1 * * * ntpdate 0.asia.pool.ntp.org
+```
