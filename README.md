@@ -393,10 +393,13 @@ ntpdate 0.asia.pool.ntp.org
 tar -zxvf zookeeper-3.4.6.tar.gz
 mkdir -p /data/zookeeper
 cp zoo_sample.cfg zoo.cfg
-vi zoo.cfg
+
 // 把dataDir的路径修改成刚刚自己创建的data路径
+vi zoo.cfg
+
 cd ../bin/
 ./zkServer.sh start
+
 // 查看是否启动成功
 ./zkServer.sh status
 ```
