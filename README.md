@@ -385,7 +385,7 @@ ntpdate 0.asia.pool.ntp.org
 可以加入到定时任务中
 
 ```
-* */1 * * * ntpdate 0.asia.pool.ntp.org
+* */1 * * * /usr/sbin/ntpdate pool.ntp.org
 ```
 
 ## 安装zookeeper
