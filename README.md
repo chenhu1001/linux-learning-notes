@@ -403,3 +403,31 @@ cd ../bin/
 // 查看是否启动成功
 ./zkServer.sh status
 ```
+
+## CentOS7防火墙常用操作
+
+```
+// 查看防火墙状态
+firewall-cmd --state
+
+// 开启防火墙
+systemctl start firewalld.service
+
+// 设置开机自启
+systemctl enable firewalld.service
+
+// 重启防火墙
+systemctl restart firewalld.service
+
+// 检查防火墙状态是否打开
+firewall-cmd --state
+
+// 查看防火墙设置开机自启是否成功
+systemctl is-enabled firewalld.service;echo $?
+
+// 开端口命令
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+
+// 查看开启的所有端口
+firewall-cmd --list-ports
+```
