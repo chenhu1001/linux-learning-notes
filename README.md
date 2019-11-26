@@ -431,3 +431,34 @@ firewall-cmd --zone=public --add-port=80/tcp --permanent
 // 查看开启的所有端口
 firewall-cmd --list-ports
 ```
+
+## screen安装
+```
+CentOS
+yum install screen
+
+Debian/Ubuntu
+apt-get install screen
+
+创建screen会话
+screen -S lnmp(会话名)
+
+暂时离开，保留screen会话中的任务或程序
+当需要临时离开时（会话中的程序不会关闭，仍在运行）可以用快捷键Ctrl+a d(即按住Ctrl，依次再按a,d)
+
+恢复screen会话
+当回来时可以再执行执行：screen -r lnmp 即可恢复到离开前创建的lnmp会话的工作界面。如果忘记了，或者当时没有指定会话名，可以执行：screen -ls screen会列出当前存在的会话列表。
+
+关闭screen的会话
+执行：exit，会提示：[screen is terminating]，表示已经成功退出screen会话
+
+远程演示
+首先演示者先在服务器上执行 screen -S test 创建一个screen会话，观众可以链接到远程服务器上执行screen -x test 观众屏幕上就会出现和演示者同步。
+
+常用快捷键
+Ctrl+a c ：在当前screen会话中创建窗口
+Ctrl+a w ：窗口列表
+Ctrl+a n ：下一个窗口
+Ctrl+a p ：上一个窗口
+Ctrl+a 0-9 ：在第0个窗口和第9个窗口之间切换
+```
