@@ -440,25 +440,103 @@ yum install screen
 Debian/Ubuntu
 apt-get install screen
 
-创建screen会话
+1、创建screen会话
 screen -S lnmp(会话名)
 
-暂时离开，保留screen会话中的任务或程序
+2、暂时离开，保留screen会话中的任务或程序
 当需要临时离开时（会话中的程序不会关闭，仍在运行）可以用快捷键Ctrl+a d(即按住Ctrl，依次再按a,d)
 
-恢复screen会话
+3、恢复screen会话
 当回来时可以再执行执行：screen -r lnmp 即可恢复到离开前创建的lnmp会话的工作界面。如果忘记了，或者当时没有指定会话名，可以执行：screen -ls screen会列出当前存在的会话列表。
 
-关闭screen的会话
+4、关闭screen的会话
 执行：exit，会提示：[screen is terminating]，表示已经成功退出screen会话
 
-远程演示
+5、远程演示
 首先演示者先在服务器上执行 screen -S test 创建一个screen会话，观众可以链接到远程服务器上执行screen -x test 观众屏幕上就会出现和演示者同步。
 
-常用快捷键
+6、常用快捷键
 Ctrl+a c ：在当前screen会话中创建窗口
 Ctrl+a w ：窗口列表
 Ctrl+a n ：下一个窗口
 Ctrl+a p ：上一个窗口
 Ctrl+a 0-9 ：在第0个窗口和第9个窗口之间切换
+```
+
+## shell脚本创建用户
+```
+#!/bin/sh
+
+#设置变量name接收第一个参数（要创建的用户名），$n表示第n个参数，且=两边不能有空格
+name=$1
+#设置变量pass接收第二个参数（要为其设置的密码）
+pass=$2
+
+#echo语句会输出到控制台，${变量}或者 $变量 表示变量代表的字符串
+echo "you are setting username : ${name}"
+echo "you are setting password : $pass for ${name}"
+
+#添加用户$name，此处sudo需要设置为无密码，后面将会作出说明
+sudo useradd $name
+
+#如果上一个命令正常运行，则输出成功，否则提示失败并以非正常状态退出程序
+# $?表示上一个命令的执行状态，-eq表示等于，[ 也是一个命令
+# if fi 是成对使用的，后面是前面的倒置，很多这样的用法。
+if [ $? -eq 0 ];then
+   echo "user ${name} is created success!"
+else
+   echo "user ${name} is created failed!!!"
+   exit 1
+fi
+#sudo passwd $name会要求填入密码，下面将$pass作为密码传入
+#echo $pass | sudo passwd $name --stdin  &> /dev/null
+
+#ubuntu系统不支持passwd的stdin参数，所以要使用chpasswd命令
+sudo echo "$name:$pass" | chpasswd
+if [ $? -eq 0 ];then
+   echo "${name}'s password is set success!"
+else
+   echo "${name}'s password is set failed!!!"
+fi
+
+if [ -d /home/$name ]
+then
+   echo "/home/$name is already exist!"
+   exit 1
+else
+    sudo mkdir /home/$name
+    sudo chown -R $name /home/$name
+fi
+```
+
+## Ubuntu报“xxx is not in the sudoers file.This incident will be reported” 错误解决方法
+```
+1.切换到root用户下
+
+2./etc/sudoers文件默认是只读的，对root来说也是，因此需先添加sudoers文件的写权限,命令是:
+chmod u+w /etc/sudoers
+
+3.编辑sudoers文件
+vi /etc/sudoers
+找到这行 root ALL=(ALL) ALL,在他下面添加xxx ALL=(ALL) ALL (这里的xxx是你的用户名)
+
+ps:这里说下你可以sudoers添加下面四行中任意一条
+youuser            ALL=(ALL)                ALL
+%youuser          ALL=(ALL)                ALL
+youuser            ALL=(ALL)                NOPASSWD: ALL
+%youuser          ALL=(ALL)                NOPASSWD: ALL
+
+第一行:允许用户youuser执行sudo命令(需要输入密码).
+第二行:允许用户组youuser里面的用户执行sudo命令(需要输入密码).
+第三行:允许用户youuser执行sudo命令,并且在执行的时候不输入密码.
+第四行:允许用户组youuser里面的用户执行sudo命令,并且在执行的时候不输入密码.
+
+4.撤销sudoers文件写权限,命令:
+chmod u-w /etc/sudoers
+```
+
+## 解决Screen出现Cannot open your terminal ‘/dev/pts/0’问题
+```
+切换用户后，执行下列语句即可：
+script /dev/null
 ```
