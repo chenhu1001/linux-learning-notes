@@ -540,3 +540,14 @@ chmod u-w /etc/sudoers
 切换用户后，执行下列语句即可：
 script /dev/null
 ```
+
+## CentOS 8 开启 BBR/升级内核
+
+```
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+sysctl -p
+// 重启 如果输出包含 BBR，说明启用成功
+sysctl -n net.ipv4.tcp_congestion_control
+lsmod | grep bbr
+```
