@@ -551,3 +551,82 @@ sysctl -p
 sysctl -n net.ipv4.tcp_congestion_control
 lsmod | grep bbr
 ```
+## 一个tomcat设置多个端口，多个端口对应多个应用
+修改tomcat/conf目录里面server.xml文件  
+例如下面这样新增一个8090端口，设置下appBase目录，这样就可以用一个tomcat监听多个端口，每个端口都可以放应用了。我这样新增下面这个配置以后，tomcat就监听了2个端口（8080，8090）  
+webapps目录和mywebapps目录的应用都会启动，可以根据不同的端口进行访问里面的应用  
+```
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Server port="8005" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+  <GlobalNamingResources>
+
+    <Resource name="UserDatabase" auth="Container"
+              type="org.apache.catalina.UserDatabase"
+              description="User database that can be updated and saved"
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+              pathname="conf/tomcat-users.xml" />
+  </GlobalNamingResources>
+
+
+  <Service name="Catalina">
+ 
+    <Connector port="80" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+     
+    <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
+ 
+    <Engine name="Catalina" defaultHost="localhost">
+ 
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+ 
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+ 
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+      </Host>
+    </Engine>
+  </Service>
+  
+  <Service name="Catalina2">
+ 
+    <Connector port="81" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8445" />
+     
+    <Connector port="8010" protocol="AJP/1.3" redirectPort="8445" />
+ 
+    <Engine name="Catalina" defaultHost="localhost">
+ 
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+ 
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+
+      <Host name="localhost"  appBase="webapps2"
+            unpackWARs="true" autoDeploy="true">
+ 
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+      </Host>
+    </Engine>
+  </Service>
+</Server>
+```
