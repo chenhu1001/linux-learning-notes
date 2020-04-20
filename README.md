@@ -630,3 +630,9 @@ webapps目录和mywebapps目录的应用都会启动，可以根据不同的端�
   </Service>
 </Server>
 ```
+## 修改oracle密码
+步骤1：使用SSH工具已root身份连接服务器；
+步骤2：切换到oracle 用户（linux上的用户）： su - oracle
+步骤3：使用sqlplus并以管理员的身份登录: sqlplus / as sysdba （出现SQL>即说明登陆成功）
+步骤4：在SQL>后面输入：alter user 数据库连接用户名 identified by "新密码";（注：1.分号不能忘；2.密码若为数字和字母组合，且数字开头，密码要用双引号）
+步骤5：修改成功。
