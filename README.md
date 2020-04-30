@@ -179,6 +179,17 @@ mysql>EXIT
 # yum remove firewalld   // #卸载firewall
 ```
 
+### 3、其他
+```
+mysql> GRANT ALL PRIVILEGES ON *.* TO root @'%' IDENTIFIED BY "tfkj123";
+Query OK, 0 rows affected (0.04 sec)
+ 
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.02 sec)
+ 
+mysql> 
+```
+
 ## iptables
 
 ```
