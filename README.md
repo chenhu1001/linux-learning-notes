@@ -181,7 +181,7 @@ mysql>EXIT
 
 ### 3、其他
 ```
-mysql> GRANT ALL PRIVILEGES ON *.* TO root @'%' IDENTIFIED BY "tfkj123";
+mysql> GRANT ALL PRIVILEGES ON *.* TO root @'%' IDENTIFIED BY "123456";
 Query OK, 0 rows affected (0.04 sec)
  
 mysql> FLUSH PRIVILEGES;
