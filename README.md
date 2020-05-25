@@ -648,7 +648,6 @@ webapps目录和mywebapps目录的应用都会启动，可以根据不同的端�
 步骤4：在SQL>后面输入：alter user 数据库连接用户名 identified by "新密码";（注：1.分号不能忘；2.密码若为数字和字母组合，且数字开头，密码要用双引号）  
 步骤5：修改成功。  
 
-## ubuntu 下pip install sasl报错fatal error: sasl/sasl.h: No such file or directory
-```
-sudo apt-get install libsasl2-dev
-```
+## pip install sasl报错fatal error: sasl/sasl.h: No such file or directory
+Ubuntu系统的话可能需要先装好libsasl2-dev
+CentOS系统需要预先装好python-devel和cyrus-sasl-devel
