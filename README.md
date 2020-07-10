@@ -651,3 +651,11 @@ webapps目录和mywebapps目录的应用都会启动，可以根据不同的端�
 ## pip install sasl报错fatal error: sasl/sasl.h: No such file or directory
 Ubuntu系统的话可能需要先装好libsasl2-dev
 CentOS系统需要预先装好python-devel和cyrus-sasl-devel
+
+## zip分卷、合卷
+```
+zip google.zip Google_Maps_API.doc // 先压缩不然就报上面的错
+zip -s 4m google.zip --out ziptest   // 分卷
+cat ziptest.z* > google_bak.zip // 利用cat来合卷
+unzip google_bak.zip  //解压  
+```
