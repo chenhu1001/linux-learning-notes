@@ -14,6 +14,10 @@ chmod +x ./kcptun.sh
 ```
 lsof -i :9000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 ```
+杀掉某个应用
+```
+ps -ef|grep -v grep|grep comprehensive-backup-service|awk '{print $2}' | xargs kill -9
+```
 
 ## live555
 
