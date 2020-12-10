@@ -685,3 +685,12 @@ mysqldump -u${mysql_user} -p${mysql_pwd} $dbname > $BackPath$BackName.sql
 echo "$t"|mutt -s "$t" 123456789@qq.com -a $BackPath$BackName.sql
 exit
 ```
+
+## zip命令
+```
+将 /home/html/ 这个目录下所有文件和文件夹打包为当前目录下的 html.zip：
+zip -q -r html.zip /home/html
+
+如果在我们在 /home/html 目录下，可以执行以下命令：
+zip -q -r html.zip *
+```
