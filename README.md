@@ -663,3 +663,25 @@ zip -s 4m google.zip --out ziptest   // 分卷
 cat ziptest.z* > google_bak.zip // 利用cat来合卷
 unzip google_bak.zip  //解压  
 ```
+
+## 数据库备份
+```
+#!/bin/bash
+#要备份网站的数据库信息
+mysql_user="root"
+mysql_pwd="123456"
+dbname="dbname"
+#定义备份邮件标题，可以区分是哪一天的
+d=$(date +"%d-%m-%Y-%H:%M:%S")
+#发送邮件标题和内容，这个是次要的，主要是附件中的数据库
+t="databases backup - $d"
+#数据库文件名称
+BackName=backup_mysql_$d
+#备份数据库存放路径<可以写上定期删除的脚本，我这里没有写>
+BackPath=/root/DBbackup/
+#导出数据库的所有库
+mysqldump -u${mysql_user} -p${mysql_pwd} $dbname > $BackPath$BackName.sql
+#用mutt发送邮件，发送到我们指定的邮箱里"backup@itbulu.com"         -s  邮件标题  -a  指定的附件<多个的话后面继续加-a>
+echo "$t"|mutt -s "$t" 123456789@qq.com -a $BackPath$BackName.sql
+exit
+```
