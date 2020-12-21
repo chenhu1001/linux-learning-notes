@@ -92,6 +92,14 @@ The binaries that are now compiled are available in the src directory. Run Redis
 ```
 src/redis-server
 ```
+常用命令：
+```
+AUTH 123456; // 鉴权
+EXISTS key; // 检查key是否存在
+SET key value; // 设置一个键的值
+GET key; // 获取一个建的值
+DEL key; // 删除键对
+```
 
 ## frp
 
