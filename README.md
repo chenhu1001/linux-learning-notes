@@ -692,6 +692,8 @@ mysqldump -u${mysql_user} -p${mysql_pwd} $dbname > $BackPath$BackName.sql
 #用mutt发送邮件，发送到我们指定的邮箱里"backup@itbulu.com"         -s  邮件标题  -a  指定的附件<多个的话后面继续加-a>
 echo "$t"|mutt -s "$t" 123456789@qq.com -a $BackPath$BackName.sql
 exit
+
+00 03 * * * /usr/bin/sh /root/DBbackup/backup.sh
 ```
 
 ## zip命令
