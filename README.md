@@ -696,6 +696,43 @@ exit
 00 03 * * * /usr/bin/sh /root/DBbackup/backup.sh
 ```
 
+## 定时清理日志文件
+```
+#! /bin/bash
+if [[ $1 && $2 && -d $1 ]]; then
+	# 时间范围
+	saveTime=$[$2*24*60*60]
+	function clearLog(){
+		for i in `ls $1`; do
+			if [[ -f $1/$i ]]; then
+				# 获取文件修改时间
+				modifiedTime=`stat -c %Y $1/$i`
+				# 获取系统当前时间
+				currTime=`date +%s`
+				if [[ $[ $currTime - $modifiedTime] -gt $saveTime ]]; then
+					rm -f $1/$i
+				fi
+
+			elif [[ -d $1/$i ]]; then
+				clearLog $1/$i
+			fi
+		done
+	}
+
+	clearLog $1
+
+	echo '清理成功'
+else
+	echo '请输入有效的文件目录和天数'
+	exit
+fi
+```
+该脚本需要指定两个参数，第一个参数是log所在的根目录，第二个参数是需要清理前几天的数据。 例:
+```
+echo '0 0 1 * * /bin/sh /your/save/path/clear.sh /your/log/path 15' > /your/crontab/file
+```
+把执行命令放入到你的crontab队列中，每月1号零点清理一次，会把log的最后修改时间距离现在已经超过15天的文件删除，支持递归删除。
+
 ## zip命令
 ```
 将 /home/html/ 这个目录下所有文件和文件夹打包为当前目录下的 html.zip：
