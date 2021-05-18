@@ -741,3 +741,8 @@ zip -q -r html.zip /home/html
 如果在我们在 /home/html 目录下，可以执行以下命令：
 zip -q -r html.zip *
 ```
+
+## 网络连通性
+```
+nc -z xxx.xxx.xxx.xxx 80
+```
