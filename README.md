@@ -1,7 +1,10 @@
 # linux-learning-notes
 Linux学习笔记
-## s*
-[一键脚本](https://doubibackup.com/6r9z6_wi-5.html)
+## 常用
+```
+// 查看开机启动项
+systemctl list-unit-files |grep enabled
+```
 
 ## kcptun
 
