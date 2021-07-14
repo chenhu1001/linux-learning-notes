@@ -4,6 +4,15 @@ Linux学习笔记
 ```
 // 查看开机启动项
 systemctl list-unit-files |grep enabled
+
+// 设置防火墙开机启动
+# systemctl enable firewalld
+
+// 开端口命令
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+
+// 重启防火墙
+systemctl restart firewalld.service
 ```
 
 ## kcptun
